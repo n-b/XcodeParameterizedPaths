@@ -1,0 +1,15 @@
+A simple test project to illustrate a bug/missing feature in Xcode.
+
+This simple app has a resource "image.png", but there are two variants of this file. I want Xcode to automatically pick the right one base on build settings.
+
+This is possible (it actually works), but it involves hacking the pbxproj file, and the Xcode UI complains the file is missing.
+
+The two variants of "image.png" are in two folders "CONFIG_1" and "CONFIG_2". The project also has two configurations "CONFIG_1" and "CONFIG_2". The hack is to make the path to the "image.png" resource :
+
+    path = "${CONFIGURATION}/image.png";
+
+It *does* work (with Xcode 4.3.1). Just open the project and switch schemes to see it.
+
+Unfortunately,
+* why can't I do it in the UI?
+* Xcode complains the file is missing (it's red), but builds successfully.
